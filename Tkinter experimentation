@@ -347,6 +347,9 @@ waiting for user input, but tkinter works with a main loop, which runs a functio
 when the user presses a button. So I need to make a new function which gets called
 instantaeously rather than waiting for user input.
 
+This function also updates current_state and lives in the main_frame,
+then displays the main frame once the user has selected difficulty
+
 '''
 
 def choose_difficulty(difficulty):
@@ -365,3 +368,15 @@ def choose_difficulty(difficulty):
    lives_used = 0
    letters_guessed = []
 
+   # updating the current_state being displayed in the main game 
+   reveal_label.config(text = current_state)
+   lives_label.config(text = f'You have used {lives_used} / 8 lives')
+
+   # using helper function to display the main game frame
+   show_frame(main_frame)
+
+#initialising the start menu as the first frame
+show_frame(start_menu_frame)
+
+#launching tkinter loop
+root.mainloop()
