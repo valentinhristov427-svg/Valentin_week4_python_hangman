@@ -302,12 +302,42 @@ quit_button.pack(pady=5)
 
 '''
 
-Screen switching function
-
-
+AI has been used in the coding of these functions, particularly the 
+screen_switching_function. The use of AI was mostly limited to 
+debugging, but I needed some assistance to come up with a way 
+to display the exact frame that I needed.
 
 '''
 
+'''
+
+Screen switching function
+
+We need a function that picks which frame we need to show. Originally
+I had the idea to build this into other functions, but I had many 
+issues. After calling upon AI, I settled upon building a helper 
+function whos entire purpose is to take an input 'frame_to_show'
+which is the exact frame that we want to display at the moment and
+do the following:
+
+1) turn off all other frames
+
+2) display 'frame_to_show'
+
+The input should always be one of start_menu_frame, main_frame, 
+or end_screen_frame.
+
+This function is super useful and will end up being called in 
+several other functions. 
+
+'''
+def show_frame(frame_to_show):
+    # stop displaying all frames
+    start_menu_frame.pack_forget()
+    main_frame.pack_forget()
+    end_screen_frame.pack_forget()
+    #display the one frame we tell it to
+    frame_to_show.pack()
 
 '''
 
@@ -334,11 +364,4 @@ def choose_difficulty(difficulty):
    # resetting lives used and letters guessed for the new round
    lives_used = 0
    letters_guessed = []
-
-   # temporary print statements to confirm that pressing a button actually triggers 
-   # this function
-
-   print(f"Difficulty: {difficulty}")
-   print(f"Secret word: {secret_word}")
-   print(f"Current state: {current_state}")
 
