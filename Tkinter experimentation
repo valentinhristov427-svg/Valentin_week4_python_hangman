@@ -189,7 +189,7 @@ end_screen_frame  = tk.Frame(root)
 
 # label
 
-difficulty_label = tk.Label(start_menu_frame, root, text="Choose a difficulty level:")
+difficulty_label = tk.Label(start_menu_frame, text="Choose a difficulty level:")
 difficulty_label.pack(pady = 20)
 
 
@@ -199,13 +199,13 @@ difficulty_label.pack(pady = 20)
 # this was bugfixed using AI because I couldn't understand why 
 # command = choose_difficulty('easy') was not working. 
 
-easy_button = tk.Button(start_menu_frame, root, text = 'Easy', 
+easy_button = tk.Button(start_menu_frame, text = 'Easy', 
                         command = lambda: choose_difficulty('easy'))
 easy_button.pack(pady=5)
 
 # same as above but for hard button
 
-hard_button = tk.Button(start_menu_frame, root, text = 'Hard',
+hard_button = tk.Button(start_menu_frame, text = 'Hard',
                         command = lambda: choose_difficulty('hard'))
 hard_button.pack(pady = 5)
 
@@ -240,25 +240,25 @@ title screen has served its purpose.
 
 
 # showing current progress, has to start empty
-current_state_display_label = tk.Label(main_frame, root, text = '')
+current_state_display_label = tk.Label(main_frame, text = '')
 current_state_display_label.pack(pady = 10)
 
 # lives label displaying remaining lives
-lives_label = tk.Label(main_frame, root, text = '')
+lives_label = tk.Label(main_frame, text = '')
 lives_label.pack(pady = 5)
 
 # user entry box
-guess_entry = tk.Entry(main_frame, root)
+guess_entry = tk.Entry(main_frame)
 guess_entry.pack(pady = 5)
 
 # button to submit answer - for now empty because I havent
 # designed the function to handle the guesses yet. 
-submit_button = tk.Button(main_frame, root, text = 'Submit letter', 
+submit_button = tk.Button(main_frame, text = 'Submit letter', 
                           command = lambda: None)
 submit_button.pack(pady =5)
 
 # message/feedback box
-message_label = tk.Label(main_frame, root, text = '' )
+message_label = tk.Label(main_frame, text = '' )
 message_label.pack(pady = 5)
             
 
@@ -277,24 +277,24 @@ below- some of them will need functions that dont exist yet.
 ### GAME END WINDOW ###
 
 # win or loss message 
-win_or_loss_label = tk.Label(end_screen_frame, root, text = '')
+win_or_loss_label = tk.Label(end_screen_frame, text = '')
 win_or_loss_label.pack(pady = 10)
 
 #word_reveal_label 
-reveal_label = tk.Label(end_screen_frame, root, text = '')
+reveal_label = tk.Label(end_screen_frame, text = '')
 reveal_label.pack(pady=5)
 
 # global_stats update
-stats_label = tk.Label(end_screen_frame, root, text = '')
+stats_label = tk.Label(end_screen_frame, text = '')
 stats_label.pack(pady=5)
 
 # play again prompt
-play_again_button = tk.Button(end_screen_frame, root, text = 'Play Again!', 
+play_again_button = tk.Button(end_screen_frame, text = 'Play Again!', 
                               command = lambda:None)
 play_again_button.pack(pady=5)
 
 # quit button using root.quit 
-quit_button = tk.Button(end_screen_frame, root, text = 'Quit', command = root.quit)
+quit_button = tk.Button(end_screen_frame, text = 'Quit', command = root.quit)
 quit_button.pack(pady=5)
 
 
@@ -369,11 +369,13 @@ def choose_difficulty(difficulty):
    letters_guessed = []
 
    # updating the current_state being displayed in the main game 
-   reveal_label.config(text = current_state)
+   current_state_display_label.config(text = current_state)
    lives_label.config(text = f'You have used {lives_used} / 8 lives')
 
    # using helper function to display the main game frame
    show_frame(main_frame)
+
+   
 
 #initialising the start menu as the first frame
 show_frame(start_menu_frame)
