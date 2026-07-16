@@ -1,0 +1,141 @@
+import tkinter as tk
+import random
+
+# initial word bank for testing
+
+word_bank_test_easy = ['cat', 'sun', 'dog']
+word_bank_test_hard = ['harder', 'words', 'list']
+
+# global counters
+
+games_played = 0
+games_won = 0
+games_lost = 0
+
+# word picking function
+
+def word_picking_func(difficulty):
+    if difficulty == 'easy':
+        word = random.choice(word_bank_test_easy)
+    elif difficulty == 'hard':
+        word = random.choice(word_bank_test_hard)
+    else:
+        print('There are two difficulties: easy and hard. Please select one.')
+        return None
+    return word
+
+
+'''
+This is the most involved function of all of them.
+It needs to perform the following functions:
+
+1) Initialise a string with as many blanks as there
+    are letters in the chosen word.
+
+2) Take user input of letter.
+
+3) Check all letters in word, and display every
+    occurance of this letter if there is a match
+    if there isnt a match, leave the position as blank.
+
+4) If letter does not appear, flag guess as 'wrong'
+    This will be needed to update guesses.
+
+It takes four inputs:
+
+1) The full secret word. Should be a string.
+2) The letter being guessed. This should be a single letter.
+3) The current state of the game. How many blanks
+    or letters have been guessed. This needs to be a string.
+4) lives_used which measures how many wrong guesses the players has
+  attempted this round.
+'''
+
+
+def letter_checking_function(secret_word, letter_guessed, current_state, lives_used):
+
+    # breaking secret word and current state into list
+    # for ease of use
+
+    # secret_word should be a word with no gaps so we use list
+
+    # current state will be a string like 'c _ _ _' so we can use split
+
+    secret_word_list = list(secret_word)
+    current_state_list = current_state.split()
+
+    # introducing a tracker to keep where we are in the loop
+    position = 0
+    lives_tracker = 0
+
+    # looping through letters in the secret word
+    for letter in secret_word_list:
+        # if the letter guessed matches the letter, we update the current_state
+        # of the word with the correct letter.
+        if letter_guessed == letter:
+            current_state_list[position] = letter_guessed
+        # if the letter is incorrectly guessed, we add 1 to a tracker,
+        # if that tracker reaches the number of letters in the word
+        # (an incorrect guess) we add a life used to the counter
+        else:
+            lives_tracker += 1
+        position += 1
+
+    if lives_tracker == len(secret_word_list):
+      lives_used += 1
+
+
+    current_state = ' '.join(current_state_list)
+
+    return current_state, lives_used
+
+    '''
+
+INPUT VALIDATION FUNCTION
+
+The letter_checking_function needs to have perfect input. It was certainly
+possible to build in input check to the function itself, but it is easier to
+build and test two separate functions.
+
+We will have a different function handling word guesses so this function only
+needs to deal with letter inputs.
+
+This function will check the user input and do the following;
+
+1) Ensure the user input is an single character
+
+2) Said character should be a letter
+
+3) Force the letter to be lowercase.
+
+4) Return the uncapitalised letter and also a True statement
+
+If the user inputs a non-letter, we will reject it and ask them to input a
+letter, and if the user inputs a capital letter we will simply make it
+lowercase.
+
+This function assumes that the input is meant to be a letter, so we will reject
+any input with multiple characters.
+
+'''
+
+def letter_validation_function(user_letter):
+
+  # removing any potential capitalisation happens before the if statement
+  # for purposes of simplifying the number of conditions we have to check
+
+  user_letter = user_letter.lower()
+
+  # checking call conditions mentionined in the doc string
+  # note that each branch returns a tuple in the case that we need to
+  # reference it later and we want to avoid running into a problem
+
+  if len(user_letter) == 0:
+    return None, False
+  if len(user_letter) > 1:
+    return None, False
+  if user_letter.isalpha() == False:
+    return None, False
+  else:
+    return user_letter, True
+  
