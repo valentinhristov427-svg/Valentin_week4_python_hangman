@@ -195,5 +195,46 @@ def choose_difficulty(difficulty):
    print(f"Current state: {current_state}")
 
 
-# Buidling the tkinter window 
+# buidling the tkinter window 
  
+# creating main window
+root = tk.Tk()
+root.title('Hangman Game')
+
+root.geometry('400x300')
+
+# creating the lables and buttons
+
+# label
+
+difficulty_label = tk.Label(root, text="Choose a difficulty level:")
+
+# placing label with padding
+difficulty_label.pack(pady=20)
+
+# buttons
+
+# using  lambda function to activate the choose_difficulty function
+# this was bugfixed using AI because I couldn't understand why 
+# command = choose_difficulty('easy') was not working. 
+
+easy_button = tk.Button(root, text = 'Easy', 
+                        command = lambda: choose_difficulty('easy'))
+
+# displaying button
+
+easy_button.pack(pady=5)
+
+# same as above but for hard button
+
+hard_button = tk.Button(root, text = 'Hard',
+                        command = lambda: choose_difficulty('hard'))
+
+hard_button.pack(pady = 5)
+
+# starting the tkinter event loop
+
+root.mainloop()
+
+
+
