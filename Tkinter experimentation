@@ -159,7 +159,7 @@ Im trying to setup a start game screen. This should contain:
 secret_word = None
 current_state = None
 lives_used = 0
-letters_guesed = []
+letters_guessed = []
 
 
 '''
@@ -251,10 +251,9 @@ lives_label.pack(pady = 5)
 guess_entry = tk.Entry(main_frame)
 guess_entry.pack(pady = 5)
 
-# button to submit answer - for now empty because I havent
-# designed the function to handle the guesses yet. 
+# button to submit answer 
 submit_button = tk.Button(main_frame, text = 'Submit letter', 
-                          command = lambda: None)
+                          command = lambda : guess_letter())
 submit_button.pack(pady =5)
 
 # message/feedback box
@@ -452,10 +451,55 @@ def guess_letter():
       return
    
    # step 5 now the letter is valid so we can proceed with the game
+   
+   # adding letter to list of guessed letters
 
-   # adding letter to list of gussed letters
+   letters_guessed.append(letter)
 
-   #
+   #updating current_state and lives_used
+   current_state, lives_used = letter_checking_function(secret_word,
+                                letter, current_state, lives_used)
+   
+   # removing any left over message text and clearing guess box
+   message_label.config(text = '')
+   guess_entry.delete(0, tk.END)
+
+   # step 6 update screen display
+
+   current_state_display_label.config(text = current_state)
+   lives_label.config(text = f'You have usd {lives_used} / 8 lives')
+
+   # step 7 check if the game has ended
+   
+   # first condition of game ending is player running out of lives
+   if lives_used >= 8:
+      # updating label to display loss
+      win_or_loss_label.config(text="You lost :(")
+      #revealing secret word
+      reveal_label.config(text=f"The word was: {secret_word}")
+      #updating global stats
+      games_played += 1
+      games_lost += 1
+      stats_label.config(text=f"Games played: {games_played} | Won: {games_won} | Lost: {games_lost}")
+      # using helper function to move onto end game screen
+      show_frame(end_screen_frame)
+
+   # second game end condition is '_' not appearing in current state anymore
+   # overall same logic as the notebook version
+   elif '_' not in current_state:
+      #updating label to display win message
+      win_or_loss_label.config(text = 'You Won!')
+      reveal_label.config(text = f'The word was: {secret_word}')
+      #updating global statistics
+      games_played += 1
+      games_won += 1
+      stats_label.config(text=f"Games played: {games_played} | Won: {games_won} | Lost: {games_lost}")
+      # using helper function to move to end screen
+      show_frame(end_screen_frame)
+    
+   # If the game has not ended, nothing else happens. We dont 
+   # need to wrap it in a loop anymore, ebcause this function
+   # is triggered by th press of a button
 
 #initialising the start menu as the first frame
 show_frame(start_menu_frame)
