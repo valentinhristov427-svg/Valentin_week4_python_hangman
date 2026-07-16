@@ -375,7 +375,87 @@ def choose_difficulty(difficulty):
    # using helper function to display the main game frame
    show_frame(main_frame)
 
+'''
+
+We now need to create a new function that deals with the user's guess.
+In my original notebook implementation (v1.1.0) this function was the
+main loop, but in this new tkinter implementation we're not waiting
+for input, the function must trigger when the player presses the 
+'submit' button. 
+
+The function wille essentially do the same thing otherwise though,
+in particular it must:
+
+1) read player's input
+
+2) pass input through letter_validation_function
+
+3) if letter_validation_function returns invalid input, display an 
+error message.
+
+4) If the letter has already been guessed, we must flag it
+
+5) For a valid guess we must
+ - add letter to letters_guessed
+ - call letter_checking function 
+ - update current_state and lives_used
+ - clear old error messages
+ - clear entry box
+
+6) update current_state and lives_label on the gui.
+
+7) Check whether the game has ended
+
+8) if game hasnt ended, do nothing
+
+9) if game has ended
+
+ - update all of the labels on the end screen
+ - update global statistics
+ - call show_frame(end_screen_frame) to display the ending screen
+
+'''
+
+
+def guess_letter():
    
+   # the function does not need inputs, everything it needs is a 
+   # global paramater
+   global current_state, lives_used, letters_guessed
+   global games_played, games_won, games_lost
+
+   # step 1 reading input
+
+   # getting a guess from the letter input box
+   input = guess_entry.get()
+
+   # step 2 passing input through letter validation
+
+   letter, is_valid = letter_validation_function(input)
+
+   # step 3 if letter_validation_function reads invalid,
+   # we reprompt
+
+   if not is_valid:
+      #displaying error message
+      message_label.config(text = 'Please enter a single letter')
+      #clearing everything in user_guessed box
+      guess_entry.delete(0, tk.END)
+      return # end the function early so we dont run future code
+   
+   # step 4 if the letter has already been guessed, we inform 
+   # the user and reprompt 
+ 
+   if letter in letters_guessed:
+      message_label.config(text = 'You have already guessed that letter, please guess again')
+      guess_entry.delete(0, tk.END)
+      return
+   
+   # step 5 now the letter is valid so we can proceed with the game
+
+   # adding letter to list of gussed letters
+
+   #
 
 #initialising the start menu as the first frame
 show_frame(start_menu_frame)
