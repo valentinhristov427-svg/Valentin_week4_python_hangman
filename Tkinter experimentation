@@ -195,7 +195,7 @@ def choose_difficulty(difficulty):
    print(f"Current state: {current_state}")
 
 
-# buidling the tkinter window 
+### GAME START WINDOW ###
  
 # creating main window
 root = tk.Tk()
@@ -236,5 +236,82 @@ hard_button.pack(pady = 5)
 
 root.mainloop()
 
+'''
+
+Building the main game in tkinter is going to be a bit more 
+complicated because of the hangman graphic. For a first pass I will
+build it without an updating hangman image, and I can try to add
+that later if I have time. 
+
+The widgets im gonna buil are:
+
+1) current_state display (progress)
+
+2) lives remaining
+
+3) guess_entry box
+
+4) button to submit guess
+
+5) A label displaying messages showing whether the letetr guessed
+is correct
+
+I do not display these yet, the plan is to display these after the 
+title screen has served its purpose. 
+
+
+'''
+
+### MAIN SCREEN ###
+
+
+# showing current progress, has to start empty
+current_state_display_label = tk.Label(root, text = '')
+
+# lives label displaying remaining lives
+lives_label = tk.Label(root, text = '')
+
+# user entry box
+guess_entry = tk.Entry(root)
+
+# button to submit answer - for now empty because I havent
+# designed the function to handle the guesses yet. 
+submit_button = tk.Button(root, text = 'Submit letter', 
+                          command = lambda: None)
+
+# message/feedback box
+
+message_label = tk.Label(root, text = '' )
+            
+
+'''
+
+Now I need to build the end screen, i.e the screen that displays 
+either the game winning message or the game losing message, aswell
+as displaying updated global statistics and prompting the player
+to play again or to quit. 
+
+We'll need widgets for each of these, which I briefly sketch out 
+below- some of them will need functions that dont exist yet.
+
+'''
+
+### GAME END WINDOW ###
+
+# win or loss message 
+win_or_loss_label = tk.Label(root, text = '')
+
+#word_reveal_label 
+reveal_label = tk.Label(root, text = '')
+
+# global_stats update
+stats_label = tk.Label(root, text = '')
+
+# play again prompt
+play_again_button = tk.Button(root, text = 'Play Again!', 
+                              command = lambda:None)
+
+# quit button using root.quit 
+quit_button = tk.Button(root, text = 'Quit', command = root.quit)
 
 
