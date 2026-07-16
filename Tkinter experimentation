@@ -139,3 +139,61 @@ def letter_validation_function(user_letter):
   else:
     return user_letter, True
   
+
+
+# Starting tkinter experimentation
+
+'''
+Im trying to setup a start game screen. This should contain:
+
+  1) text that instructs the player 
+  2) difficulty selection buttons, where pressingeither one should store the choice
+  and then move on to the next screen.
+
+  In Tkinter lingo, that means that we're going to need a label, and two buttons 
+'''
+
+
+# round variables with starting values
+
+secret_word = None
+current_state = None
+lives_used = 0
+letters_guesed = []
+
+'''
+
+I needed a new tkinter compatible choos_difficulty fucntion. This is because of the 
+way that tkinter loops work. My jupyter notebooks code worked via a loop that was
+waiting for user input, but tkinter works with a main loop, which runs a function
+when the user presses a button. So I need to make a new function which gets called
+instantaeously rather than waiting for user input.
+
+'''
+
+def choose_difficulty(difficulty):
+   
+   # establishing global variables so that we can change them in this function
+   global secret_word, current_state, lives_used, letters_guessed
+
+   # choosing the secret word using the previous function we made
+   secret_word = word_picking_func(difficulty)
+
+   # setting the current state to a string of underscores with the same length as 
+   # the secret word
+   current_state = ' '.join('_' * len(secret_word))
+
+   # resetting lives used and letters guessed for the new round
+   lives_used = 0
+   letters_guessed = []
+
+   # temporary print statements to confirm that pressing a button actually triggers 
+   # this function
+
+   print(f"Difficulty: {difficulty}")
+   print(f"Secret word: {secret_word}")
+   print(f"Current state: {current_state}")
+
+
+# Buidling the tkinter window 
+ 
