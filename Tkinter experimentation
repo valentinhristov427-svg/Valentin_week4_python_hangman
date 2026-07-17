@@ -538,8 +538,9 @@ def guess_letter():
       games_played += 1
       games_lost += 1
       stats_label.config(text=f"Games played: {games_played} | Won: {games_won} | Lost: {games_lost}")
-      # using helper function to move onto end game screen
-      show_frame(end_screen_frame)
+      # using helper function to move onto end game screen after
+      # waiting a bit of time to let the drawn hangman settle
+      root.after(2000,lambda: show_frame(end_screen_frame))
 
    # second game end condition is '_' not appearing in current state anymore
    # overall same logic as the notebook version
