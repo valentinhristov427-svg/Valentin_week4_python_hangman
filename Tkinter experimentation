@@ -391,6 +391,36 @@ def choose_difficulty(difficulty):
 
 '''
 
+HANGMAN DRAWING FUNCTION
+
+This function takes as input the number of lives, and draws on 
+a different body part based on how many lives. We start with the 
+head, then torso, then arms and finally legs. Crucially, a 
+body part thats been drawn on does not dissapear until we clear
+the screen, so calling the function seevral times will draw 
+multiple limbs and not replace them. 
+
+### AI USED TO GENERATE LOCATION OF LIMBS ###
+
+'''
+
+def draw_body_part(lives_used):
+   if lives_used == 1:
+      hangman_canvas.create_oval(110,50,150,90)
+   elif lives_used == 2:
+      hangman_canvas.create_line(130, 90, 130, 150)         
+   elif lives_used == 3:
+      hangman_canvas.create_line(130, 100, 100, 130)         
+   elif lives_used == 4:
+      hangman_canvas.create_line(130, 100, 160, 130)       
+   elif lives_used == 5:
+      hangman_canvas.create_line(130, 150, 100, 190)        
+   elif lives_used == 6:
+      hangman_canvas.create_line(130, 150, 160, 190) 
+
+
+'''
+
 We now need to create a new function that deals with the user's guess.
 In my original notebook implementation (v1.1.0) this function was the
 main loop, but in this new tkinter implementation we're not waiting
@@ -475,6 +505,9 @@ def guess_letter():
    current_state, lives_used = letter_checking_function(secret_word,
                                 letter, current_state, lives_used)
    
+   # draw appropriate hangman body part
+   draw_body_part(lives_used)
+
    # removing any left over message text and clearing guess box
    message_label.config(text = '')
    guess_entry.delete(0, tk.END)
