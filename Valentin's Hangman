@@ -49,7 +49,7 @@ def word_picking_func(difficulty):
 
 
 '''
-This is the most involved function of all of them.
+This is the most involved function so far.
 It needs to perform the following functions:
 
 1) Initialise a string with as many blanks as there
@@ -162,19 +162,7 @@ def letter_validation_function(user_letter):
   else:
     return user_letter, True
   
-
-
-# Starting tkinter experimentation
-
-'''
-Im trying to setup a start game screen. This should contain:
-
-  1) text that instructs the player 
-  2) difficulty selection buttons, where pressingeither one should store the choice
-  and then move on to the next screen.
-
-  In Tkinter lingo, that means that we're going to need a label, and two buttons 
-'''
+### TKINTER STEPS ### 
 
 
 # round variables with starting values
@@ -193,6 +181,8 @@ create  tkintr frames, and load one in at a time
 
 '''
 
+
+
 ### GAME START WINDOW ###
  
 # creating main window
@@ -206,6 +196,17 @@ root.geometry('400x650')
 start_menu_frame = tk.Frame(root)
 main_frame = tk.Frame(root)
 end_screen_frame  = tk.Frame(root)
+
+
+'''
+Im trying to setup a start game screen. This should contain:
+
+  1) text that instructs the player 
+  2) difficulty selection buttons, where pressingeither one should store the choice
+  and then move on to the next screen.
+
+  In Tkinter lingo, that means that we're going to need a label, and two buttons 
+'''
 
 # creating labels and buttons, and attaching them to 
 # the start menu frame. 
@@ -343,9 +344,8 @@ quit_button.pack(pady=5)
 
 '''
 
-AI has been used in the coding of these functions, particularly the 
-screen_switching_function. The use of AI was mostly limited to 
-debugging, but I needed some assistance to come up with a way 
+AI has been used in the coding of the  screen_switching_function. The use of AI was
+mostly limited to  debugging, but I needed some assistance to come up with a way 
 to display the exact frame that I needed.
 
 '''
@@ -382,7 +382,7 @@ def show_frame(frame_to_show):
 
 '''
 
-I needed a new tkinter compatible choos_difficulty fucntion. This is because of the 
+I needed a new tkinter compatible choose_difficulty fucntion. This is because of the 
 way that tkinter loops work. My jupyter notebooks code worked via a loop that was
 waiting for user input, but tkinter works with a main loop, which runs a function
 when the user presses a button. So I need to make a new function which gets called
