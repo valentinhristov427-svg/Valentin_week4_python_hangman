@@ -3,8 +3,31 @@ import random
 
 # initial word bank for testing
 
-word_bank_test_easy = ['cat', 'sun', 'dog']
-word_bank_test_hard = ['harder', 'words', 'list']
+word_bank_test_easy = [
+    'apple', 'table', 'chair', 'house', 'water', 'happy', 'green', 'brown',
+    'purple', 'yellow', 'orange', 'pencil', 'window', 'garden', 'bottle',
+    'basket', 'candle', 'blanket', 'kitchen', 'bicycle', 'sandwich', 'weekend',
+    'morning', 'evening', 'holiday', 'birthday', 'library', 'thunder',
+    'diamond', 'compass', 'mirror', 'pillow', 'shadow', 'rocket', 'castle',
+    'dragon', 'monkey', 'rabbit', 'turtle', 'spider', 'parrot', 'dolphin',
+    'penguin', 'squirrel', 'hamster', 'lizard', 'jacket', 'sweater',
+    'scarf', 'gloves', 'sneaker', 'trumpet', 'guitar', 'violin', 'drummer',
+    'painter', 'teacher', 'doctor', 'farmer', 'builder'
+]
+
+word_bank_test_hard =[
+    'giraffe', 'elephant', 'crocodile', 'butterfly', 'dinosaur', 'astronaut',
+    'telescope', 'chocolate', 'symphony', 'penguin', 'volcano', 'labyrinth',
+    'kangaroo', 'orchestra', 'chameleon', 'satellite', 'pyramid', 'dragonfly',
+    'hurricane', 'jellyfish', 'porcupine', 'waterfall', 'silhouette', 'avalanche',
+    'xylophone', 'archipelago', 'constellation', 'photosynthesis', 'metamorphosis',
+    'kaleidoscope', 'bureaucracy', 'phenomenon', 'chrysanthemum', 'thunderstorm',
+    'quicksilver', 'stalactite', 'tarantula', 'flamingo', 'hippopotamus',
+    'rhinoceros', 'octopus', 'wilderness', 'expedition', 'civilization',
+    'renaissance', 'philosophy', 'mysterious', 'algorithm', 'microscope',
+    'earthquake', 'lighthouse', 'watermelon', 'griffin', 'obstacle',
+    'nostalgia', 'symmetry', 'melancholy', 'quixotic', 'ephemeral', 'labyrinthine'
+]
 
 # global counters
 
@@ -251,6 +274,10 @@ lives_label.pack(pady = 5)
 guess_entry = tk.Entry(main_frame)
 guess_entry.pack(pady = 5)
 
+# display letters guessed
+letters_guessed_label = tk.Label(main_frame, text='')
+letters_guessed_label.pack(pady=5)
+
 # button to submit answer 
 submit_button = tk.Button(main_frame, text = 'Submit letter', 
                           command = lambda : guess_letter())
@@ -378,14 +405,17 @@ def choose_difficulty(difficulty):
    # the secret word
    current_state = ' '.join('_' * len(secret_word))
 
-   # resetting lives used and letters guessed for the new round
+   # resetting lives used, letters guessed for the new round
    lives_used = 0
    letters_guessed = []
 
-   # updating the current_state being displayed in the main game 
+
+   # resetting the current_state being displayed in the main game 
    current_state_display_label.config(text = current_state)
    lives_label.config(text = f'You have used {lives_used} / 6 lives')
-   
+
+   letters_guessed_label.config(text = 'Guessed letters: ')
+
    # clearing hangman
    hangman_canvas.delete('all')
 
@@ -525,6 +555,7 @@ def guess_letter():
 
    current_state_display_label.config(text = current_state)
    lives_label.config(text = f'You have usd {lives_used} / 6 lives')
+   letters_guessed_label.config(text = f"Guessed letters: {', '.join(letters_guessed)}")
 
    # step 7 check if the game has ended
    
