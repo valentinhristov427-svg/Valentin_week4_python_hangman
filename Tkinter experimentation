@@ -259,6 +259,19 @@ submit_button.pack(pady =5)
 # message/feedback box
 message_label = tk.Label(main_frame, text = '' )
 message_label.pack(pady = 5)
+
+# hang man figure canvas
+hangman_canvas = tk.Canvas(main_frame, width = 200, height = 250,
+                           bg = 'white')
+hangman_canvas.pack(pady = 10)
+
+# drawing the gallows on the canvas
+### AI WAS USED TO GENERATE THE LOCATION OF THE LINES ###
+
+hangman_canvas.create_line(20, 230, 120, 230)   
+hangman_canvas.create_line(50, 230, 50, 20)     
+hangman_canvas.create_line(50, 20, 130, 20)  
+hangman_canvas.create_line(130, 20, 130, 50)
             
 
 '''
