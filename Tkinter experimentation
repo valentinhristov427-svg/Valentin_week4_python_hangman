@@ -371,7 +371,7 @@ def choose_difficulty(difficulty):
 
    # updating the current_state being displayed in the main game 
    current_state_display_label.config(text = current_state)
-   lives_label.config(text = f'You have used {lives_used} / 8 lives')
+   lives_label.config(text = f'You have used {lives_used} / 6 lives')
 
    # using helper function to display the main game frame
    show_frame(main_frame)
@@ -469,12 +469,12 @@ def guess_letter():
    # step 6 update screen display
 
    current_state_display_label.config(text = current_state)
-   lives_label.config(text = f'You have usd {lives_used} / 8 lives')
+   lives_label.config(text = f'You have usd {lives_used} / 6 lives')
 
    # step 7 check if the game has ended
    
    # first condition of game ending is player running out of lives
-   if lives_used >= 8:
+   if lives_used >= 6:
       # updating label to display loss
       win_or_loss_label.config(text="You lost :(")
       #revealing secret word
