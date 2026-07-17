@@ -385,6 +385,15 @@ def choose_difficulty(difficulty):
    # updating the current_state being displayed in the main game 
    current_state_display_label.config(text = current_state)
    lives_label.config(text = f'You have used {lives_used} / 6 lives')
+   
+   # clearing hangman
+   hangman_canvas.delete('all')
+
+   # redrawing canvas
+   hangman_canvas.create_line(20, 230, 120, 230)   
+   hangman_canvas.create_line(50, 230, 50, 20)     
+   hangman_canvas.create_line(50, 20, 130, 20)  
+   hangman_canvas.create_line(130, 20, 130, 50)
 
    # using helper function to display the main game frame
    show_frame(main_frame)
