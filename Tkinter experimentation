@@ -287,9 +287,11 @@ reveal_label.pack(pady=5)
 stats_label = tk.Label(end_screen_frame, text = '')
 stats_label.pack(pady=5)
 
-# play again prompt
+# play again prompt 
+# simply needs to launch the start menu and do nothing else 
+# thebuttons in the start menu handle clearing old information
 play_again_button = tk.Button(end_screen_frame, text = 'Play Again!', 
-                              command = lambda:None)
+                              command = lambda : show_frame(start_menu_frame))
 play_again_button.pack(pady=5)
 
 # quit button using root.quit 
